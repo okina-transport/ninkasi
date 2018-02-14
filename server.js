@@ -89,7 +89,7 @@ convictConfig.then( (convict) => {
 
   const createKeyCloakConfig = authServerUrl => {
     let config = {
-      "realm": "rutebanken",
+      "realm": "Naq",
       "tokens-not-before": 1490857383,
       "public-client" : true,
       "auth-server-url": authServerUrl,
