@@ -18,49 +18,41 @@ module.exports = new Promise(function (resolve, reject) {
     },
     organisationsBaseUrl: {
       doc: "Base URL for for Organisations API including slash",
-      format: "url",
       default: "http://baba:16001/services/organisations/",
       env: "ORGANISATIONS_BASE_URL"
     },
     providersBaseUrl: {
       doc: "Base URL for for Providers API including slash",
-      format: "url",
       default: "http://baba:16001/services/providers/",
       env: "PROVIDERS_BASE_URL"
     },
     eventsBaseUrl: {
       doc: "Base URL for for Events API including slash",
-      format: "url",
       default: "http://marduk:8888/services/events/",
       env: "EVENTS_BASE_URL"
     },
     nabuEventsBaseUrl: {
       doc: "Base URL for for Events API including slash",
-      format: "url",
-      default: "http://localhost:9004/services/events/",
+      default: "http://nabu:9004/services/events/",
       env: "NABU_EVENTS_BASE_URL"
     },
     timetableAdminBaseUrl: {
       doc: "Base URL for for Timatable admin API including slash",
-      format: "url",
       default: "http://marduk:8888/services/timetable_admin/",
       env: "TIMETABLE_ADMIN_BASE_URL"
     },
     mapAdminBaseUrl: {
       doc: "Base URL for for Map admin API including slash",
-      format: "url",
       default: "http://marduk:8888/services/map_admin/",
       env: "MAP_ADMIN_BASE_URL"
     },
     mapboxAdminBaseUrl: {
       doc: "Base URL for for Mapbox admin API including slash",
-      format: "url",
       default: "http://marduk:8888/services/mapbox_admin/",
       env: "MAPBOX_ADMIN_BASE_URL"
     },
     geocoderAdminBaseUrl: {
       doc: "Base URL for for Geocoder admin API including slash",
-      format: "url",
       default: "http://marduk:8888/services/geocoder_admin/",
       env: "GEOCODER_ADMIN_BASE_URL"
     },
