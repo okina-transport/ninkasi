@@ -18,6 +18,6 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY source/ .
 RUN npm install
-RUN npm build
+RUN npm run build
 
 CMD [ "dumb-init", "npm", "run", "prod" ]
