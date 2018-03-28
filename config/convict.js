@@ -18,42 +18,42 @@ module.exports = new Promise(function (resolve, reject) {
     },
     organisationsBaseUrl: {
       doc: "Base URL for for Organisations API including slash",
-      default: "http://baba:16001/services/organisations/",
+      default: "https://naq-prod01.sysnove.net:16001/services/organisations/",
       env: "ORGANISATIONS_BASE_URL"
     },
     providersBaseUrl: {
       doc: "Base URL for for Providers API including slash",
-      default: "http://baba:16001/services/providers/",
+      default: "https://naq-prod01.sysnove.net:16001/services/providers/",
       env: "PROVIDERS_BASE_URL"
     },
     eventsBaseUrl: {
       doc: "Base URL for for Events API including slash",
-      default: "http://marduk:8888/services/events/",
+      default: "https://naq-prod01.sysnove.net:8888/services/events/",
       env: "EVENTS_BASE_URL"
     },
     nabuEventsBaseUrl: {
       doc: "Base URL for for Events API including slash",
-      default: "http://nabu:9004/services/events/",
+      default: "https://naq-prod01.sysnove.net:9004/services/events/",
       env: "NABU_EVENTS_BASE_URL"
     },
     timetableAdminBaseUrl: {
       doc: "Base URL for for Timatable admin API including slash",
-      default: "http://marduk:8888/services/timetable_admin/",
+      default: "https://naq-prod01.sysnove.net:8888/services/timetable_admin/",
       env: "TIMETABLE_ADMIN_BASE_URL"
     },
     mapAdminBaseUrl: {
       doc: "Base URL for for Map admin API including slash",
-      default: "http://marduk:8888/services/map_admin/",
+      default: "https://naq-prod01.sysnove.net:8888/services/map_admin/",
       env: "MAP_ADMIN_BASE_URL"
     },
     mapboxAdminBaseUrl: {
       doc: "Base URL for for Mapbox admin API including slash",
-      default: "http://marduk:8888/services/mapbox_admin/",
+      default: "https://naq-prod01.sysnove.net:8888/services/mapbox_admin/",
       env: "MAPBOX_ADMIN_BASE_URL"
     },
     geocoderAdminBaseUrl: {
       doc: "Base URL for for Geocoder admin API including slash",
-      default: "http://marduk:8888/services/geocoder_admin/",
+      default: "https://naq-prod01.sysnove.net:8888/services/geocoder_admin/",
       env: "GEOCODER_ADMIN_BASE_URL"
     },
     endpointBase: {
@@ -71,7 +71,7 @@ module.exports = new Promise(function (resolve, reject) {
     chouetteBaseUrl: {
       doc: "URL to Chouette UI",
       format: String,
-      default: "http://chouette2:3000/",
+      default: "https://naq-prod01.sysnove.net:3000/",
       env: "CHOUETTE_BASE_URL"
     },
 
