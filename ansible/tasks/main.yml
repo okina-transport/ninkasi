@@ -22,7 +22,7 @@
     reauthorize: yes
 
 - name: Build the ninkasi docker image (this takes about 2 minutes)
-  shell: docker build --tag={{ registry_image_name|quote }}:{{ version|quote }} --force-rm=true {{image_docker_root}} > {{logfile}} 2>&1
+  shell: docker build --tag={{ registry_image_name|quote }}:{{ version|quote }} --force-rm=true {{image_docker_root}} --build-arg SSH_KEY="$(cat ~/.ssh/id_rsa)" > {{logfile}} 2>&1
   register: image
 
 - name: Push ninkasi docker image if built
