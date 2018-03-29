@@ -7,8 +7,8 @@
     "build": "BABEL_ENV=production NODE_ENV=production webpack --config ./webpack.prod.config.js",
     "start": "node server.js",
     "test": "./node_modules/.bin/mocha -r jsdom-global/register --compilers js:babel-core/register ./tests",
-    "dev": "BABEL_ENV=production NODE_ENV=production NABU_EVENTS_BASE_URL=http://127.0.0.1:9004/services/events/ PROVIDERS_BASE_URL=http://127.0.0.1:16001/services/providers/ ORGANISATIONS_BASE_URL=http://127.0.0.1:16001/services/organisations/ EVENTS_BASE_URL=http://127.0.0.1:9004/services/events/ TIMETABLE_ADMIN_BASE_URL=http://127.0.0.1:8776/services/timetable_admin/ node server.js",
-    "integ": "BABEL_ENV=production NODE_ENV=production NABU_EVENTS_BASE_URL=https://naq-dev01.sysnove.net:9004/services/events/ PROVIDERS_BASE_URL=https://dev-naq01.okina.fr:16001/services/providers/ ORGANISATIONS_BASE_URL=https://dev-naq01.okina.fr:16001/services/organisations/ EVENTS_BASE_URL=https://dev-naq01.okina.fr:9004/services/events/ TIMETABLE_ADMIN_BASE_URL=https://dev-naq01.okina.fr:8776/services/timetable_admin/ node server.js",
+    "dev": "BABEL_ENV=production NODE_ENV=production NABU_EVENTS_BASE_URL=http://127.0.0.1:9004/services/events/ PROVIDERS_BASE_URL=http://127.0.0.1:16001/services/providers/ ORGANISATIONS_BASE_URL=http://127.0.0.1:16001/services/organisations/ EVENTS_BASE_URL=http://127.0.0.1:9004/services/events/ TIMETABLE_ADMIN_BASE_URL=http://127.0.0.1:8888/services/timetable_admin/ node server.js",
+    "integ": "BABEL_ENV=production NODE_ENV=production NABU_EVENTS_BASE_URL=https://naq-dev01.sysnove.net:9004/services/events/ PROVIDERS_BASE_URL=https://dev-naq01.okina.fr:16001/services/providers/ ORGANISATIONS_BASE_URL=https://dev-naq01.okina.fr:16001/services/organisations/ EVENTS_BASE_URL=https://dev-naq01.okina.fr:9004/services/events/ TIMETABLE_ADMIN_BASE_URL=https://dev-naq01.okina.fr:8888/services/timetable_admin/ node server.js",
     "prod": "BABEL_ENV=production NODE_ENV=production node server.js"
   },
   "author": "Sean Erik Scully",

@@ -38,22 +38,22 @@ module.exports = new Promise(function (resolve, reject) {
     },
     timetableAdminBaseUrl: {
       doc: "Base URL for for Timatable admin API including slash",
-      default: "https://naq-prod01.sysnove.net:8776/services/timetable_admin/",
+      default: "https://naq-prod01.sysnove.net:8888/services/timetable_admin/",
       env: "TIMETABLE_ADMIN_BASE_URL"
     },
     mapAdminBaseUrl: {
       doc: "Base URL for for Map admin API including slash",
-      default: "https://naq-prod01.sysnove.net:8776/services/map_admin/",
+      default: "https://naq-prod01.sysnove.net:8888/services/map_admin/",
       env: "MAP_ADMIN_BASE_URL"
     },
     mapboxAdminBaseUrl: {
       doc: "Base URL for for Mapbox admin API including slash",
-      default: "https://naq-prod01.sysnove.net:8776/services/mapbox_admin/",
+      default: "https://naq-prod01.sysnove.net:8888/services/mapbox_admin/",
       env: "MAPBOX_ADMIN_BASE_URL"
     },
     geocoderAdminBaseUrl: {
       doc: "Base URL for for Geocoder admin API including slash",
-      default: "https://naq-prod01.sysnove.net:8776/services/geocoder_admin/",
+      default: "https://naq-prod01.sysnove.net:8888/services/geocoder_admin/",
       env: "GEOCODER_ADMIN_BASE_URL"
     },
     endpointBase: {
