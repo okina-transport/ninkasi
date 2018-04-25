@@ -31,11 +31,6 @@ module.exports = new Promise(function (resolve, reject) {
       default: "https://naq-prod01.sysnove.net:8888/services/events/",
       env: "EVENTS_BASE_URL"
     },
-    nabuEventsBaseUrl: {
-      doc: "Base URL for for Events API including slash",
-      default: "https://naq-prod01.sysnove.net:9004/services/events/",
-      env: "NABU_EVENTS_BASE_URL"
-    },
     timetableAdminBaseUrl: {
       doc: "Base URL for for Timatable admin API including slash",
       default: "https://naq-prod01.sysnove.net:8776/services/timetable_admin/",

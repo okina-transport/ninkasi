@@ -66,7 +66,6 @@ convictConfig.then((convict) => {
       providersBaseUrl: convict.get('providersBaseUrl'),
       organisationsBaseUrl: convict.get('organisationsBaseUrl'),
       eventsBaseUrl: convict.get('eventsBaseUrl'),
-      nabuEventsBaseUrl: convict.get('nabuEventsBaseUrl'),
       timetableAdminBaseUrl: convict.get('timetableAdminBaseUrl'),
       mapAdminBaseUrl: convict.get('mapAdminBaseUrl'),
       mapboxAdminBaseUrl: convict.get('mapboxAdminBaseUrl'),

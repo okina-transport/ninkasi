@@ -678,7 +678,7 @@ SuppliersActions.exportData = id => dispatch => {
 };
 
 SuppliersActions.getGraphStatus = () => dispatch => {
-  const url = window.config.nabuEventsBaseUrl + `admin_summary/status/aggregation`;
+  const url = window.config.eventsBaseUrl + `admin_summary/status/aggregation`;
 
   return axios
     .get(url, getConfig())
