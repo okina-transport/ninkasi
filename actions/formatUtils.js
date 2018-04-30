@@ -8,7 +8,7 @@ export const ExportStatus = Object.freeze({
 
 
 const isOfficialNorwegianGTFS = (name = '') => (
-  name.indexOf('rb_norway-aggregated-gtfs.zip') > -1
+  name.indexOf('naq-aggregated-gtfs.zip') > -1
 );
 
 export const addExportedFileMetadata = (
@@ -52,7 +52,7 @@ export const addExportedNorwayMetadata = (norwayNetex, norwayGTFS, providerData)
   providerData['ALL'] = {
     NETEX,
     GTFS,
-    referential: 'Norway'
+    referential: 'Naq'
   };
 };
 
@@ -67,7 +67,7 @@ export const formatProviderData = providerData => {
       [ExportStatus.ERROR]: 2,
     };
 
-    if (a.referential === 'Norway') return -1;
+    if (a.referential === 'Naq') return -1;
 
     return priority[statusA] - priority[statusB];
   });
