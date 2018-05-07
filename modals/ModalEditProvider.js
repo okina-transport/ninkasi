@@ -305,8 +305,8 @@ class ModalEditProvider extends Component {
             checked={this.state._allowCreateMissingStopPlace}
             style={{ flex: 1, maxWidth: 360 }}
             labelStyle={{ fontSize: '0.9em' }}
-            onCheck={(e, v) =>
-              this.setState({ _allowCreateMissingStopPlace: v })}
+            onCheck={(e, v) => this.setState({ _allowCreateMissingStopPlace: v })}
+            title="If the stop place doesn't exist in Tiamat, Chouette creates it"
           />
           <Checkbox
             label="Enable stop place Id mapping"
@@ -314,6 +314,7 @@ class ModalEditProvider extends Component {
             style={{ flex: 1 }}
             labelStyle={{ fontSize: '0.9em' }}
             onCheck={(e, v) => this.setState({ _enableStopPlaceIdMapping: v })}
+            title="ID mapping with the stop places of Tiamat"
           />
         </div>
         <div style={{ ...rowStyle, marginTop: 10 }}>
@@ -323,6 +324,7 @@ class ModalEditProvider extends Component {
             style={{ flex: 1, maxWidth: 360 }}
             labelStyle={{ fontSize: '0.9em' }}
             onCheck={(e, v) => this.setState({ _enableCleanImport: v })}
+            title="Clean the dataspace of Chouette before the new import"
           />
           <Checkbox
             label="Enable validation"
@@ -330,6 +332,7 @@ class ModalEditProvider extends Component {
             style={{ flex: 1 }}
             labelStyle={{ fontSize: '0.9em' }}
             onCheck={(e, v) => this.setState({ _enableValidation: v })}
+            title="Start automatically the validation after the import"
           />
         </div>
         <div style={{ ...rowStyle, marginTop: 10 }}>
@@ -339,6 +342,7 @@ class ModalEditProvider extends Component {
             style={{ flex: 1, maxWidth: 360 }}
             labelStyle={{ fontSize: '0.9em' }}
             onCheck={(e, v) => this.setState({ _enableAutoImport: v })}
+            title="Start automatically the import after the file upload"
           />
         </div>
       </Dialog>
