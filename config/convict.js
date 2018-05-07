@@ -18,37 +18,37 @@ module.exports = new Promise(function (resolve, reject) {
     },
     organisationsBaseUrl: {
       doc: "Base URL for for Organisations API including slash",
-      default: "https://naq-prod01.sysnove.net:16001/services/organisations/",
+      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/organisations/1.0/",
       env: "ORGANISATIONS_BASE_URL"
     },
     providersBaseUrl: {
       doc: "Base URL for for Providers API including slash",
-      default: "https://naq-prod01.sysnove.net:16001/services/providers/",
+      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/providers/1.0/",
       env: "PROVIDERS_BASE_URL"
     },
     eventsBaseUrl: {
       doc: "Base URL for for Events API including slash",
-      default: "https://naq-prod01.sysnove.net:8888/services/events/",
+      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/events/1.0/",
       env: "EVENTS_BASE_URL"
     },
     timetableAdminBaseUrl: {
       doc: "Base URL for for Timatable admin API including slash",
-      default: "https://naq-prod01.sysnove.net:8776/services/timetable_admin/",
+      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/timetable_admin/1.0/",
       env: "TIMETABLE_ADMIN_BASE_URL"
     },
     mapAdminBaseUrl: {
       doc: "Base URL for for Map admin API including slash",
-      default: "https://naq-prod01.sysnove.net:8776/services/map_admin/",
+      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/map_admin/1.0/",
       env: "MAP_ADMIN_BASE_URL"
     },
     mapboxAdminBaseUrl: {
       doc: "Base URL for for Mapbox admin API including slash",
-      default: "https://naq-prod01.sysnove.net:8776/services/mapbox_admin/",
+      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/mapbox_admin/1.0/",
       env: "MAPBOX_ADMIN_BASE_URL"
     },
     geocoderAdminBaseUrl: {
       doc: "Base URL for for Geocoder admin API including slash",
-      default: "https://naq-prod01.sysnove.net:8776/services/geocoder_admin/",
+      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/geocoder_admin/1.0/",
       env: "GEOCODER_ADMIN_BASE_URL"
     },
     endpointBase: {
@@ -66,7 +66,7 @@ module.exports = new Promise(function (resolve, reject) {
     chouetteBaseUrl: {
       doc: "URL to Chouette UI",
       format: String,
-      default: "https://naq-prod01.sysnove.net:3000/",
+      default: "https://offre-rmr.nouvelle-aquitaine.pro/",
       env: "CHOUETTE_BASE_URL"
     },
 
@@ -81,7 +81,7 @@ module.exports = new Promise(function (resolve, reject) {
     // Read contents from configUrl if it is given
     request(configUrl, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        body = JSON.parse(body)
+        body = JSON.parse(body);
         conf.load(body);
         conf.validate();
         resolve(conf)
@@ -90,8 +90,8 @@ module.exports = new Promise(function (resolve, reject) {
       }
     });
   } else {
-    console.log("The CONFIG_URL element has not been set, so you use the default dev-mode configuration")
+    console.log("The CONFIG_URL element has not been set, so you use the default dev-mode configuration");
     conf.validate();
-    resolve(conf)
+    resolve(conf);
   }
-})
+});
