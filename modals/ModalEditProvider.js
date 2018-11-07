@@ -5,6 +5,9 @@ import Checkbox from 'material-ui/Checkbox';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
+import {connect} from 'react-redux';
+import SuppliersActions from '../actions/SuppliersActions';
+import TransportModesPopover from './TransportModesPopover';
 
 class ModalEditProvider extends Component {
   componentWillReceiveProps(nextProps) {
@@ -25,6 +28,8 @@ class ModalEditProvider extends Component {
         allowCreateMissingStopPlace,
         enableStopPlaceIdMapping,
         enableCleanImport,
+        generateDatedServiceJourneyIds,
+        generateMissingServiceLinksForModes,
         migrateDataToProvider,
         enableAutoImport
       } = provider.chouetteInfo;
@@ -47,6 +52,8 @@ class ModalEditProvider extends Component {
         _allowCreateMissingStopPlace: allowCreateMissingStopPlace,
         _enableStopPlaceIdMapping: enableStopPlaceIdMapping,
         _enableCleanImport: enableCleanImport,
+        _generateDatedServiceJourneyIds: generateDatedServiceJourneyIds,
+        _generateMissingServiceLinksForModes: generateMissingServiceLinksForModes,
         _migrateDataToProvider: migrateDataToProvider,
         _enableAutoImport: enableAutoImport,
       });
@@ -69,10 +76,16 @@ class ModalEditProvider extends Component {
         _allowCreateMissingStopPlace: false,
         _enableStopPlaceIdMapping: false,
         _enableCleanImport: false,
+        _generateDatedServiceJourneyIds: false,
+        _generateMissingServiceLinksForModes: [],
         _migrateDataToProvider: null,
         _enableAutoImport: false
       });
     }
+  }
+  componentDidMount() {
+    const {dispatch} = this.props;
+    dispatch(SuppliersActions.getTransportModes());
   }
 
   getTitle() {
@@ -128,8 +141,23 @@ class ModalEditProvider extends Component {
     ));
   }
 
+  handleCheckTransportMode(transportMode, isChecked) {
+    let transportModes = this.state._generateMissingServiceLinksForModes;
+    var idx = transportModes.indexOf(transportMode);
+    if (isChecked && idx === -1) {
+        transportModes = transportModes.concat(transportMode);
+    } else if (!isChecked && idx >= 0) {
+        transportModes = [
+            ...transportModes.slice(0, idx),
+            ...transportModes.slice(idx+1)
+        ];
+    }
+    this.setState({_generateMissingServiceLinksForModes: transportModes});
+  }
+
+
   render() {
-    const { open, providers, handleClose, handleSubmit } = this.props;
+    const { open, providers, handleClose, handleSubmit, allTransportModes } = this.props;
 
     if (!this.state) return null;
 
@@ -299,6 +327,13 @@ class ModalEditProvider extends Component {
             onChange={(e, v) => this.setState({ _sftpAccount: v })}
           />
         </div>
+        <div style={{...rowStyle, marginTop: 10}}>
+          <TransportModesPopover
+              allTransportModes={allTransportModes}
+              transportModes={this.state._generateMissingServiceLinksForModes}
+              handleCheckTransportMode={this.handleCheckTransportMode.bind(this)}
+          />
+        </div>
         <div style={{ ...rowStyle, marginTop: 10 }}>
           <Checkbox
             label="Allow create missing stop place"
@@ -344,10 +379,20 @@ class ModalEditProvider extends Component {
             onCheck={(e, v) => this.setState({ _enableAutoImport: v })}
             title="Start automatically the import after the file upload"
           />
+          <Checkbox
+              label="Generate DatedServiceJourneyIds"
+              checked={this.state._generateDatedServiceJourneyIds}
+              style={{ flex: 1 }}
+              labelStyle={{ fontSize: '0.9em' }}
+              onCheck={(e, v) => this.setState({ _generateDatedServiceJourneyIds: v })}
+          />
         </div>
       </Dialog>
     );
   }
 }
+const mapStateToProps = state => ({
+    allTransportModes: state.SuppliersReducer.allTransportModes
+});
 
-export default ModalEditProvider;
+export default connect(mapStateToProps)(ModalEditProvider);

@@ -315,6 +315,8 @@ const getProviderPayload = data => {
       allowCreateMissingStopPlace: trimmedData._allowCreateMissingStopPlace,
       enableStopPlaceIdMapping: trimmedData._enableStopPlaceIdMapping,
       enableCleanImport: trimmedData._enableCleanImport,
+      generateDatedServiceJourneyIds: trimmedData._generateDatedServiceJourneyIds,
+      generateMissingServiceLinksForModes: trimmedData._generateMissingServiceLinksForModes,
       migrateDataToProvider: trimmedData._migrateDataToProvider,
       enableAutoImport: trimmedData._enableAutoImport
     }
@@ -1006,6 +1008,52 @@ SuppliersActions.fetchOSM = () => dispatch => {
     });
 };
 
+SuppliersActions.uploadGoogleProduction = () => dispatch => {
+  const url = window.config.timetableAdminBaseUrl + 'export/google/publish';
+  dispatch(requestUploadGoogleProduction());
+  return axios({
+    url: url,
+    timeout: 20000,
+    method: 'post',
+    ...getConfig()
+  })
+    .then(function(response) {
+      dispatch(sendData(response.data, types.SUCCESS_UPLOAD_GOOGLE_PRODUCTION));
+      dispatch(
+        SuppliersActions.addNotification('Google upload started (production)', 'success')
+      );
+      dispatch(SuppliersActions.logEvent({ title: 'Google upload started (production)' }));
+    })
+    .catch(function(response) {
+      dispatch(sendData(response.data, types.ERROR_UPLOAD_GOOGLE_PRODUCTION));
+      dispatch(SuppliersActions.addNotification('Google upload failed (production)', 'error'));
+      dispatch(SuppliersActions.logEvent({ title: 'Google upload failed (production)' }));
+    });
+};
+
+SuppliersActions.uploadGoogleQA = () => dispatch => {
+  const url = window.config.timetableAdminBaseUrl + 'export/google-qa/publish';
+  dispatch(requestUploadGoogleQA());
+  return axios({
+    url: url,
+    timeout: 20000,
+    method: 'post',
+    ...getConfig()
+  })
+    .then(function(response) {
+      dispatch(sendData(response.data, types.SUCCESS_UPLOAD_GOOGLE_QA));
+      dispatch(
+        SuppliersActions.addNotification('Google upload started (QA)', 'success')
+      );
+      dispatch(SuppliersActions.logEvent({ title: 'Google upload started (QA)' }));
+    })
+    .catch(function(response) {
+      dispatch(sendData(response.data, types.ERROR_UPLOAD_GOOGLE_QA));
+      dispatch(SuppliersActions.addNotification('Google upload failed (QA)', 'error'));
+      dispatch(SuppliersActions.logEvent({ title: 'Google upload failed (QA)' }));
+    });
+};
+
 SuppliersActions.updateMapbox = () => dispatch => {
   const url = window.config.mapboxAdminBaseUrl + 'update';
 
@@ -1076,6 +1124,14 @@ function requestBuildGraph() {
 
 function requestFetchOSM() {
   return { type: types.REQUEST_FETCH_OSM };
+}
+
+function requestUploadGoogleProduction() {
+    return { type: types.REQUEST_UPLOAD_GOOGLE_PRODUCTION };
+}
+
+function requestUploadGoogleQA() {
+    return { type: types.REQUEST_UPLOAD_GOOGLE_QA };
 }
 
 function requestCleanDataspace() {
@@ -1307,6 +1363,19 @@ SuppliersActions.cleanFileFilter = () => dispatch => {
         SuppliersActions.logEvent({ title: 'Cleaning file filter failed' })
       );
     });
+};
+
+SuppliersActions.getTransportModes = () => dispatch => {
+    const url = `${window.config
+        .providersBaseUrl}transport_modes`;
+    return axios
+        .get(url, getConfig())
+        .then(response => {
+            dispatch(sendData(response.data, types.RECEIVED_TRANSPORT_MODES));
+        })
+        .catch(error => {
+            console.log('Error receiving transport modes', error);
+        });
 };
 
 export default SuppliersActions;

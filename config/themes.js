@@ -1,8 +1,8 @@
 export const getProvidersEnv = providersBaseUrl => {
   if (providersBaseUrl) {
-    if (providersBaseUrl.indexOf('api-test.entur.org') > -1) {
+    if (providersBaseUrl.indexOf('offre-rmr.nouvelle-aquitaine.pro') > -1) {
       return 'TEST';
-    } else if (providersBaseUrl.indexOf('api.entur.org') > -1) {
+    } else if (providersBaseUrl.indexOf('offre-rmr.nouvelle-aquitaine.pro') > -1) {
       return 'PROD';
     } else {
       return 'DEV';
