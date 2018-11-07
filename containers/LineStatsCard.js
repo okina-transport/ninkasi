@@ -132,7 +132,7 @@ class LineStatsCard extends React.Component {
                   </div>
                   <div style={validDateStartStyle}>{stats.startDate}</div>
                   <div style={validDateMiddleStyle}>
-                    {stats.validFromDate} (120 days)
+                    {stats.validFromDate} (30 days)
                   </div>
                   <div style={validDateEndStyle}>{stats.endDate}</div>
                 </div>
