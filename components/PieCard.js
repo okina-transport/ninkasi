@@ -11,6 +11,15 @@ class PieCard extends React.Component {
     provider: PropTypes.object.isRequired
   };
 
+    constructor(props) {
+        super(props);
+        for(let i in this.props.stats.validity){
+            if(this.props.stats.validity[i].name !== "EXPIRING" && this.props.stats.validity[i].name !== "INVALID"){
+                this.props.stats.valid.lineNumbers = this.props.stats.validity[i].lineNumbers;
+            }
+        }
+    }
+
   state = {
     showSum: true
   };
