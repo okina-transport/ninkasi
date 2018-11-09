@@ -51,6 +51,16 @@ class StatisticsDetails extends React.Component {
 
   render() {
     const { suppliers, lineStats } = this.props;
+      if(lineStats != null){
+          for(let idProvider in lineStats){
+              for(let categorie in lineStats[idProvider].validity){
+                  if(lineStats[idProvider].validity[categorie].name !== "EXPIRING" && lineStats[idProvider].validity[categorie].name !== "INVALID"){
+                      lineStats[idProvider].valid.lineNumbers = lineStats[idProvider].validity[categorie].lineNumbers;
+                  }
+              }
+          }
+      }
+
     const { selectedProvider, selectedSegment, daysValid } = this.state;
 
     const title = segmentName(selectedSegment, daysValid);

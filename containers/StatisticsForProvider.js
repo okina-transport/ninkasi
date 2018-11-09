@@ -51,6 +51,13 @@ class StatisticsForProvider extends React.Component {
 
   render() {
     const { lineStats, provider } = this.props;
+      if(lineStats != null){
+          for(let i in lineStats.validity){
+              if(lineStats.validity[i].name !== "EXPIRING" && lineStats.validity[i].name !== "INVALID"){
+                  lineStats.valid.lineNumbers = lineStats.validity[i].lineNumbers;
+              }
+          }
+      }
     const { selectedSegment, daysValid } = this.state;
 
     const title = segmentName(selectedSegment, daysValid);
