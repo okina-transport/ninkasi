@@ -60,13 +60,13 @@ module.exports = new Promise(function (resolve, reject) {
     authServerUrl: {
       doc: "URL to keycloak auth server",
       format: String,
-      default: "https://auth-rmr.nouvelle-aquitaine.pro/auth",
+      default: "https://auth.dev-2.okina.fr/auth",
       env: "AUTH_SERVER_URL"
     },
     chouetteBaseUrl: {
       doc: "URL to Chouette UI",
       format: String,
-      default: "https://offre-rmr.nouvelle-aquitaine.pro/",
+      default: "https://offre.dev-2.okina.fr/",
       env: "CHOUETTE_BASE_URL"
     },
 
