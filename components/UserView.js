@@ -295,7 +295,6 @@ class UserView extends React.Component {
                     style={{
                       height: 20,
                       width: 20,
-                      marginRight: 4,
                       marginRight: 10,
                       verticalAlign: 'middle',
                       cursor: 'pointer'
