@@ -188,9 +188,9 @@ class SupplierTabWrapper extends React.Component {
     }
   }
 
-  handleFileUpload(files) {
+  handleFileUpload(files, user, description) {
     const { dispatch, activeId } = this.props;
-    dispatch(SuppliersActions.uploadFiles(files, activeId));
+    dispatch(SuppliersActions.uploadFiles(files, user, description, activeId));
   }
 
   handleRefreshAllProviders() {

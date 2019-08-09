@@ -20,6 +20,18 @@ const getConfig = () => {
   return config;
 };
 
+const getConfigMultipart = () => {
+  let config = {};
+  let token = localStorage.getItem('NINKASI::jwt');
+
+    config.headers = {
+        // 'Content-Type': 'multipart/form-data',
+        // Accept: 'multipart/form-data',
+        Authorization: 'Bearer ' + token
+    };
+  return config;
+};
+
 SuppliersActions.cleanStopPlacesInChouette = () => dispatch => {
   const url = window.config.timetableAdminBaseUrl + 'stop_places/clean';
   return axios
@@ -130,23 +142,27 @@ SuppliersActions.executePeliasTask = tasks => dispatch => {
     });
 };
 
-SuppliersActions.uploadFiles = (files, providerId) => dispatch => {
+SuppliersActions.uploadFiles = (files, user, description, providerId) => dispatch => {
   dispatch(sendData(0, types.UPDATED_FILE_UPLOAD_PROGRESS));
 
   const url = `${window.config.timetableAdminBaseUrl}${providerId}/files`;
 
   var data = new FormData();
 
-  files.forEach(file => {
-    data.append('files', file);
-  });
+    // files.forEach(file => {
+    //   data.append('files', file);
+    // });
+
+    data.append('files', files[0]);
+    data.append('user', user);
+    data.append('description', description);
 
   var config = {
     onUploadProgress: function(progressEvent) {
       let percentCompleted = progressEvent.loaded / progressEvent.total * 100;
       dispatch(sendData(percentCompleted, types.UPDATED_FILE_UPLOAD_PROGRESS));
     },
-    ...getConfig()
+    ...getConfigMultipart()
   };
 
   return axios

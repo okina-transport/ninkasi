@@ -2,22 +2,33 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import Button from 'muicss/lib/react/button';
 import Progress from 'react-progressbar';
+import rolesParser from "../roles/rolesParser";
+import {connect} from "react-redux";
 
 class FileUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      files: []
+      files: [],
+      user: '',
+      description: ''
     };
   }
 
-  handleOnDrop(files) {
-    if (files.length) {
+  handleOnDrop(acceptedFiles, user) {
+    if (acceptedFiles.length) {
+      var arrayFile = Array.from(acceptedFiles);
       this.setState({
-        files: files
+        files: arrayFile,
+        user: user.tokenParsed.preferred_username
       });
-      return false;
     }
+  }
+
+  handleDescription(description){
+    this.setState({
+      description: description
+    });
   }
 
   render() {
@@ -46,50 +57,69 @@ class FileUpload extends React.Component {
       marginTop: 10
     };
 
-    const { files } = this.state;
-    const { fileUploadProgress, handleFileUpload } = this.props;
+    const { files, user, description } = this.state;
+    const { fileUploadProgress, handleFileUpload, kc } = this.props;
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          width: '80%',
-          margin: 'auto',
-          marginTop: '5%'
-        }}
-      >
-        <Dropzone
-          style={dropStyle}
-          accept="application/zip,application/octet-stream,application/x-zip,application/x-rar,application/x-zip-compressed,application/x-rar-compressed,compressed/rar,application/rar"
-          onDrop={(files, rejected) => {
-            this.handleOnDrop(files);
-            console.warn("rejected", rejected)
-          }}
-        >
-          <div style={{ textAlign: 'center' }}>
-            Try dropping some files here, or click to select files to upload.
+      <div>
+        <div
+            style={{
+          maxWidth: '33%',
+          height: '50px',
+          border: '1px dashed #666',
+          borderRadius: '2px',
+          margin: '20px auto'
+            }}>
+          <input
+              style={{
+            marginLeft: '10px',
+            marginTop: '15px',
+              }}
+              type="file" onChange={(e) => this.handleOnDrop(e.target.files, kc)}
+          />
+        </div>
+        <div>
+          <div
+              style={{
+                maxWidth: '33%',
+                margin: '20px auto'
+              }}>
+            <div
+                style={{
+                  textTransform: 'uppercase',
+                }}
+            >Description (Facultatif)
+            </div>
+            <div
+            style={{
+              height: '125px'
+            }}>
+              <textarea
+                  style={{
+                    width: '100%',
+                    height: '125px'
+                  }}
+                  disabled={!files.length}
+                  onChange={(e) => this.handleDescription(e.target.value)}
+              />
+            </div>
+            <Button
+                disabled={!files.length}
+                style={uploadButtonStyle}
+                color="primary"
+                onClick={() => files.length && handleFileUpload(files, user, description)}
+            >
+              Upload
+            </Button>
           </div>
-        </Dropzone>
-        {files.length
-          ? <select style={filesStyle} multiple>
-              {files.map((file, index) => {
-                return <option key={'file-' + index}>{file.name}</option>;
-              })}
-            </select>
-          : <div style={{ marginTop: '5%' }}>No files added</div>}
-        <Progress color="#8dcc91" completed={fileUploadProgress} />
-        <Button
-          disabled={!files.length}
-          style={uploadButtonStyle}
-          color="primary"
-          onClick={() => files.length && handleFileUpload(files)}
-        >
-          Upload
-        </Button>
+        </div>
       </div>
     );
   }
 }
 
-export default FileUpload;
+const mapStateToProps = state => ({
+  kc: state.UserReducer.kc,
+});
+
+export default connect(mapStateToProps)(FileUpload);

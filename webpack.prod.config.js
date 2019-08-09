@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
+  devtool: 'inline-source-map',
   entry: {
       app: './index',
       react: ['react', 'react-redux']
