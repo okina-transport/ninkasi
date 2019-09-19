@@ -5,6 +5,9 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MdAccount from 'material-ui/svg-icons/action/account-circle';
+import MdLocalOffer from 'material-ui/svg-icons/maps/local-offer';
+import MdRoom from 'material-ui/svg-icons/action/room';
+import MdImportExport from 'material-ui/svg-icons/communication/import-export';
 import { connect } from 'react-redux';
 import MdHistory from 'material-ui/svg-icons/action/history';
 import SuppliersActions from '../actions/SuppliersActions';
@@ -74,6 +77,27 @@ class Header extends React.Component {
             targetOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
           >
+            <MenuItem
+                primaryText={'Portail offre'}
+                leftIcon={<MdLocalOffer color="#41c0c4" />}
+                style={{ fontSize: 12, padding: 0 }}
+                href="/offre"
+                target="_blank"
+            />
+            <MenuItem
+                primaryText={'Portail import'}
+                leftIcon={<MdImportExport color="#41c0c4" />}
+                style={{ fontSize: 12, padding: 0 }}
+                href="/import"
+                target="_blank"
+            />
+            <MenuItem
+                primaryText={'Référentiel arrêts'}
+                leftIcon={<MdRoom color="#41c0c4" />}
+                style={{ fontSize: 12, padding: 0 }}
+                href="/arrets"
+                target="_blank"
+            />
             <MenuItem
               primaryText={'History'}
               leftIcon={<MdHistory color="#41c0c4" />}
