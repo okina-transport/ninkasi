@@ -45,7 +45,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         include: __dirname,
-        loader: 'babel-loader',
+        loader: 'babel',
         query: {
           presets: ['es2015', 'stage-1', 'react']
         }
@@ -54,7 +54,7 @@ module.exports = {
         test: /\.scss$/,
         exclude: /node_modules/,
         include: __dirname,
-        loaders: ['style-loader', 'css-loader', 'sass']
+        loaders: ['style', 'css', 'sass']
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
