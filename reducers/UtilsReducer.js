@@ -5,6 +5,7 @@ import moment from 'moment';
 const intialState = {
   shouldUpdateProvider: false,
   editProviderModal: false,
+  exportModal: false,
   outboundFilelist: [],
   expandedEvents: [],
   isModalOpen: false,
@@ -95,6 +96,9 @@ const UtilsReducer = (state = intialState, action) => {
     case types.DISMISS_EDIT_PROVIDER_DIALOG:
       return Object.assign({}, state, { editProviderModal: false });
 
+    case types.DISMISS_EXPORT_MODAL:
+      return Object.assign({}, state, { exportModal: false });
+
     case types.OPENED_EDIT_PROVIDER_DIALOG:
       return Object.assign({}, state, {
         shouldUpdateProvider: true,
@@ -105,6 +109,11 @@ const UtilsReducer = (state = intialState, action) => {
       return Object.assign({}, state, {
         shouldUpdateProvider: false,
         editProviderModal: true
+      });
+
+    case types.OPENED_EXPORT_MODAL:
+      return Object.assign({}, state, {
+        exportModal: true
       });
 
     case types.LOG_EVENT:

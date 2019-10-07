@@ -1310,10 +1310,22 @@ SuppliersActions.openNewProviderDialog = () => {
   };
 };
 
+SuppliersActions.openExportModal = () => {
+    return {
+        type: types.OPENED_EXPORT_MODAL
+    };
+};
+
 SuppliersActions.dismissEditProviderDialog = () => {
   return {
     type: types.DISMISS_EDIT_PROVIDER_DIALOG
   };
+};
+
+SuppliersActions.dismissExportModal = () => {
+    return {
+        type: types.DISMISS_EXPORT_MODAL
+    };
 };
 
 SuppliersActions.logEvent = event => {
