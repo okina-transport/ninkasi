@@ -13,6 +13,7 @@ const intialState = {
   filteredLoggedEvents: [],
   isConfigLoaded: false,
   activeTab: 'migrateData',
+  lines: {},
   eventListSortOrder: {
     property: 'firstEvent',
     sortOrder: 0 // 0 = asc, 1 = desc
@@ -167,6 +168,11 @@ const UtilsReducer = (state = intialState, action) => {
 
     case types.CONFIG_LOADED:
       return Object.assign({}, state, { isConfigLoaded: true });
+
+    case types.RECEIVED_LINES:
+      return Object.assign({}, state, {
+        lines: action.payLoad
+      });
 
     default:
       return state;

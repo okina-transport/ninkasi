@@ -1394,4 +1394,21 @@ SuppliersActions.getTransportModes = () => dispatch => {
         });
 };
 
+SuppliersActions.getLines = () => dispatch => {
+    const url = `${window.config.chouetteBaseUrl}referentials/tun/lines`; //TODO Remplacer "tun" par le bon referential
+    return axios
+        .get(url, getConfig())
+        .then(response => {
+            dispatch(sendData(response.data, types.RECEIVED_LINES));
+        })
+        .catch(error => {
+            console.log('Error receiving lines', error);
+        });
+};
+
+SuppliersActions.postLines = (linesId) => dispatch => {
+    // TODO POSTER LES LIGNES
+    console.log("SuppliersActions.postLines: " + linesId);
+};
+
 export default SuppliersActions;

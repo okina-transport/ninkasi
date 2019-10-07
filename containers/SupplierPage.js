@@ -29,6 +29,14 @@ class SupplierPage extends React.Component {
     this.handleClose();
   }
 
+    handleGetLines() {
+        this.props.dispatch(SuppliersActions.getLines());
+    }
+
+    handlePostLines(linesId) {
+        this.props.dispatch(SuppliersActions.postLines(linesId));
+    }
+
   handleClose() {
     this.props.dispatch(SuppliersActions.dismissEditProviderDialog());
   }

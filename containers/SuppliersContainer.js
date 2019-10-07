@@ -132,6 +132,10 @@ class SuppliersContainer extends React.Component {
     this.props.dispatch(SuppliersActions.openNewProviderDialog());
   }
 
+    handleExportModal() {
+        this.props.dispatch(SuppliersActions.openExportModal());
+    }
+
   handleCancelAllJobs() {
     this.setState({
       confirmDialogOpen: true,
@@ -403,103 +407,6 @@ class SuppliersContainer extends React.Component {
           <div>
             <FlatButton
               disabled={!isAdmin}
-              title={toolTips.pelias}
-              labelStyle={{ fontSize: 12, color: '#fff' }}
-              label={'Pelias'}
-              labelPosition="before"
-              onClick={event => this.handleTogglePeliasOpen(event, true)}
-              icon={
-                <MdDropDown
-                  color="#fff"
-                  style={{ verticalAlign: 'middle', marginTop: -3 }}
-                />
-              }
-            />
-            <Popover
-              open={this.state.peliasOpen}
-              anchorEl={this.state.anchorEl}
-              anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-              targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-              onRequestClose={event =>
-                this.handleTogglePeliasOpen(event, false)}
-              style={peliasPopoverStyle}
-            >
-              {peliasOptions}
-            </Popover>
-            <FlatButton
-              disabled={!isAdmin}
-              title={toolTips.buildGraph}
-              labelStyle={{ fontSize: 12, color: '#fff' }}
-              label={'Build Graph'}
-              onClick={this.handleBuildGraph.bind(this)}
-            />
-            <FlatButton
-              disabled={!isAdmin}
-              title={toolTips.fetchOSM}
-              labelStyle={{ fontSize: 12, color: '#fff' }}
-              label={'Fetch OSM'}
-              onClick={this.handleFetchOSM.bind(this)}
-            />
-            <FlatButton
-                disabled={!isAdmin}
-                onClick={this.handleGoogleOpen.bind(this)}
-            >
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div
-                    style={{
-                        fontSize: 12,
-                        color: '#fff',
-                        paddingLeft: 8,
-                        paddingRight: 8,
-                        paddingTop: 2,
-                        textTransform: 'uppercase'
-                    }}
-                >
-                  Google
-                </div>
-                <MdDropDown color="#fff"/>
-              </div>
-            </FlatButton>
-          <Popover
-            open={this.state.googlePopoverOpen}
-            anchorEl={this.state.anchorEl}
-            anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-            targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-            onRequestClose={() => this.setState({ googlePopoverOpen: false })}
-          >
-            <MenuItem
-              primaryText={'Upload GTFS (production)'}
-              style={{ fontSize: '1.1em' }}
-              onClick={() => this.handleUploadGoogleProduction()}
-              disabled={!isAdmin}
-              title={toolTips.uploadGoogleProduction}
-            />
-            <MenuItem
-              primaryText={'Upload GTFS (QA)'}
-              style={{ fontSize: '1em' }}
-              onClick={() => this.handleUploadGoogleQA()}
-              disabled={!isAdmin}
-              title={toolTips.uploadGoogleQA}
-            />
-          </Popover>
-            {/*<FlatButton
-              disabled={!isAdmin}
-              title={toolTips.updateMapbox}
-              labelStyle={{ fontSize: 12, color: '#fff' }}
-              label={'Update Mapbox'}
-              onClick={this.handleUpdateMapbox.bind(this)}
-            />*/}
-          </div>
-          <div
-            style={{
-              borderLeft: '1px solid #4c4c4c',
-              height: 15,
-              margin: '10px 0'
-            }}
-          />
-          <div>
-            <FlatButton
-              disabled={!isAdmin}
               onClick={this.handleCleanOpen.bind(this)}
             >
               <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -536,6 +443,13 @@ class SuppliersContainer extends React.Component {
               }
               onClick={() => this.handleCancelAllJobs()}
             />
+              <FlatButton
+                  disabled={!isAdmin}
+                  onClick={this.handleExportModal.bind(this)}
+                  label={'Export'}
+                  labelStyle={{fontSize: 12, color: '#fff'}}
+                  style={{transform: 'translateY(-3px)'}}
+              />
           </div>
           <Popover
             open={this.state.cleanPopoverOpen}
