@@ -60,7 +60,7 @@ module.exports = new Promise(function (resolve, reject) {
     authServerUrl: {
       doc: "URL to keycloak auth server",
       format: String,
-      default: "https://auth.dev-2.okina.fr/auth",
+      default: "https://mosaic.dev-2.okina.fr/auth",
       env: "AUTH_SERVER_URL"
     },
     chouetteBaseUrl: {
