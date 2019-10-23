@@ -66,13 +66,13 @@ module.exports = new Promise(function (resolve, reject) {
     chouetteBaseUrl: {
       doc: "URL to Chouette UI",
       format: String,
-      default: "https://offre.dev-2.okina.fr/",
+      default: "https://mosaic.dev-2.okina.fr/offre",
       env: "CHOUETTE_BASE_URL"
     },
     exportStopPlacesBaseUrl: {
       doc: "Base URL for to export stop places",
       format: String,
-      default: "https://offre.dev-2.okina.fr/",
+      default: "https://mosaic.dev-2.okina.fr/api-proxy/api/export/1.0/",
       env: "EXPORT_STOP_PLACES_BASE_URL"
     }
 
