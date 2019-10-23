@@ -71,7 +71,8 @@ convictConfig.then((convict) => {
       mapboxAdminBaseUrl: convict.get('mapboxAdminBaseUrl'),
       geocoderAdminBaseUrl: convict.get('geocoderAdminBaseUrl'),
       endpointBase: convict.get('endpointBase'),
-      chouetteBaseUrl: convict.get('chouetteBaseUrl')
+      chouetteBaseUrl: convict.get('chouetteBaseUrl'),
+      exportStopPlacesBaseUrl: convict.get('exportStopPlacesBaseUrl')
     }
 
     createKeyCloakConfig(convict.get('authServerUrl'))

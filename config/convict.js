@@ -69,6 +69,12 @@ module.exports = new Promise(function (resolve, reject) {
       default: "https://offre.dev-2.okina.fr/",
       env: "CHOUETTE_BASE_URL"
     },
+    exportStopPlacesBaseUrl: {
+      doc: "Base URL for to export stop places",
+      format: String,
+      default: "https://offre.dev-2.okina.fr/",
+      env: "EXPORT_STOP_PLACES_BASE_URL"
+    }
 
   });
 

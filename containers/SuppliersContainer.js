@@ -145,6 +145,12 @@ class SuppliersContainer extends React.Component {
     });
   }
 
+  exportAllStopPlaces() {
+    const { dispatch } = this.props;
+    dispatch(SuppliersActions.exportStopPlacesAllProviders());
+  }
+
+
   handleCleanAllDataSpaces(filter) {
     let filterText = '';
 
@@ -535,6 +541,13 @@ class SuppliersContainer extends React.Component {
                 />
               }
               onClick={() => this.handleCancelAllJobs()}
+            />
+            <FlatButton
+                disabled={!isAdmin}
+                style={{transform: 'translateY(-3px)'}}
+                labelStyle={{ fontSize: 12, color: '#fff' }}
+                label={'Export stop places for all providers'}
+                onClick={() => this.exportAllStopPlaces()}
             />
           </div>
           <Popover

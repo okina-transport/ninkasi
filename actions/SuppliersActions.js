@@ -1170,6 +1170,14 @@ function requestFilenames() {
   return { type: types.REQUEST_FILENAMES };
 }
 
+function requestExportStopPlacesAllProviders() {
+    return { type: types.REQUEST_EXPORT_STOP_PLACES_ALL_PROVIDERS };
+}
+
+function requestExportStopPlacesOneProvider() {
+    return { type: types.REQUEST_EXPORT_STOP_PLACES_ONE_PROVIDER };
+}
+
 SuppliersActions.toggleChouetteInfoCheckboxFilter = (
   option,
   value
@@ -1391,6 +1399,66 @@ SuppliersActions.getTransportModes = () => dispatch => {
         })
         .catch(error => {
             console.log('Error receiving transport modes', error);
+        });
+};
+
+SuppliersActions.exportStopPlacesAllProviders = () => dispatch => {
+    const url = window.config.exportStopPlacesBaseUrl + `stop_places`;
+
+    dispatch(requestExportStopPlacesAllProviders());
+    return axios({
+        url: url,
+        timeout: 20000,
+        method: 'post',
+        ...getConfig()
+    })
+        .then(function(response) {
+            dispatch(sendData(response.data, types.SUCCESS_EXPORT_STOP_PLACES_ALL_PROVIDERS));
+            dispatch(SuppliersActions.addNotification('Export stop places for all providers started', 'success'));
+            dispatch(
+                SuppliersActions.logEvent({
+                    title: `Export stop places for all providers started`
+                })
+            );
+        })
+        .catch(function(response) {
+            dispatch(sendData(response.data, types.ERROR_EXPORT_STOP_PLACES_ALL_PROVIDERS));
+            dispatch(SuppliersActions.addNotification('Export stop places for all providers failed', 'error'));
+            dispatch(
+                SuppliersActions.logEvent({
+                    title: `Export stop places for all providers failed`
+                })
+            );
+        });
+};
+
+SuppliersActions.requestExportStopPlacesOneProvider = id => dispatch => {
+    const url = window.config.exportStopPlacesBaseUrl + `${id}/export`;
+
+    dispatch(requestExportStopPlacesOneProvider());
+    return axios({
+        url: url,
+        timeout: 20000,
+        method: 'post',
+        ...getConfig()
+    })
+        .then(function(response) {
+            dispatch(sendData(response.data, types.SUCCESS_EXPORT_STOP_PLACES_ONE_PROVIDER));
+            dispatch(SuppliersActions.addNotification('Export started', 'success'));
+            dispatch(
+                SuppliersActions.logEvent({
+                    title: `Exported stop places for provider ${id}`
+                })
+            );
+        })
+        .catch(function(response) {
+            dispatch(sendData(response.data, types.ERROR_EXPORT_STOP_PLACES_ONE_PROVIDER));
+            dispatch(SuppliersActions.addNotification('Export failed', 'error'));
+            dispatch(
+                SuppliersActions.logEvent({
+                    title: `Export stop places failed for provider ${id}`
+                })
+            );
         });
 };
 
