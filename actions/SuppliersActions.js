@@ -8,6 +8,16 @@ import { addExportedFileMetadata, formatProviderData, addExportedNorwayMetadata 
 
 var SuppliersActions = {};
 
+const getConfigLight = () => {
+    let config = {};
+    let token = localStorage.getItem('NINKASI::jwt');
+
+    config.headers = {
+        Authorization: 'Bearer ' + token
+    };
+    return config;
+};
+
 const getConfig = () => {
   let config = {};
   let token = localStorage.getItem('NINKASI::jwt');
@@ -1410,7 +1420,7 @@ SuppliersActions.exportStopPlacesAllProviders = () => dispatch => {
         url: url,
         timeout: 20000,
         method: 'post',
-        ...getConfig()
+        ...getConfigLight()
     })
         .then(function(response) {
             dispatch(sendData(response.data, types.SUCCESS_EXPORT_STOP_PLACES_ALL_PROVIDERS));
