@@ -6,11 +6,6 @@ export const ExportStatus = Object.freeze({
   ERROR: 'ERROR'
 });
 
-
-const isOfficialNorwegianGTFS = (name = '') => (
-  name.indexOf('naq-aggregated-gtfs.zip') > -1
-);
-
 export const addExportedFileMetadata = (
   providerId,
   referential,
@@ -24,10 +19,10 @@ export const addExportedFileMetadata = (
   if (providerId === null) {
     if (format === 'NETEX') {
       norwayNetex.push(file);
-    } else if (format === 'GTFS' && isOfficialNorwegianGTFS(file.name)) {
+    } else if (format === 'GTFS') {
       norwayGTFS.push(file);
     }
-    return;
+    norwayNetex.push(file);
   }
 
   if (providerData[providerId]) {
@@ -47,7 +42,7 @@ export const addExportedFileMetadata = (
 };
 
 export const addExportedNorwayMetadata = (norwayNetex, norwayGTFS, providerData) => {
-  const GTFS = norwayGTFS.sort((a, b) => b.updated - a.updated).filter(file => isOfficialNorwegianGTFS(file.name));
+  const GTFS = norwayGTFS.sort((a, b) => b.updated - a.updated);
   const NETEX = norwayNetex.sort((a, b) => b.updated - a.updated);
   providerData['ALL'] = {
     NETEX,
@@ -86,14 +81,21 @@ const formatProviderRow = providerRow => {
   const gtfsFileSize = getFirstFromArray(GTFS, 'fileSize');
   const gtfsUrl = getFirstFromArray(GTFS, 'url');
   const netexUrl = getFirstFromArray(NETEX, 'url');
+  let fileName = getFirstFromArray(gtfsUrl ? GTFS : NETEX, 'name');
   const diff = netexDate && gtfsDate
     ? moment.duration(moment(netexDate).diff(moment(gtfsDate)))
     : null;
   const diffHumanized = diff ? diff.humanize() : null;
   const status = getProviderRowStatus(netexDate, gtfsDate);
 
+  if(fileName) {
+    const fileNameSplit = fileName.split('/');
+    fileName = fileNameSplit[fileNameSplit.length - 1];
+  }
+
   return {
     ...providerRow,
+    fileName,
     diff,
     diffHumanized,
     gtfsDate,

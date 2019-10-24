@@ -32,6 +32,7 @@ class ExportedFilesRow extends Component {
     const { data, index, referential, providerName } = this.props;
 
     const {
+      fileName,
       netexDate,
       gtfsDate,
       netexFileSize,
@@ -65,7 +66,7 @@ class ExportedFilesRow extends Component {
 
     return (
       <div style={style}>
-        <div style={{ flex: 2.5 }}>{isAggregatedSet ? norwayDisplayName : providerName}</div>
+          <div style={{flex: 2.5}}>{fileName}</div>
         <div style={{ flex: 1 }}>{data.referential || referential}</div>
         <div
           style={{
@@ -76,7 +77,7 @@ class ExportedFilesRow extends Component {
           {netexDate ? moment(netexDate).format('LLLL') : 'NO EXPORT'}
         </div>
         <div style={{ flex: 1 }}>
-          {netexFileSize &&
+          {netexUrl &&
             <a
               style={{ display: 'flex', alignItems: 'center' }}
               href={netexUrl}
@@ -97,7 +98,7 @@ class ExportedFilesRow extends Component {
           {gtfsDate ? moment(gtfsDate).format('LLLL') : 'NO EXPORT'}
         </div>
         <div style={{ flex: 1 }}>
-          {gtfsFileSize &&
+          {gtfsUrl &&
             <a
               style={{ display: 'flex', alignItems: 'center' }}
               href={gtfsUrl}
@@ -112,7 +113,7 @@ class ExportedFilesRow extends Component {
         <div style={{ flex: 1 }}>
           {diffHumanized}
         </div>
-        <div style={{ flex: 4 }}>
+        <div style={{ flex: 3 }}>
           {label}
         </div>
       </div>

@@ -32,7 +32,7 @@ class ExportedFilesHeader extends Component {
         <div style={{flex: 1}}>
           Difference
         </div>
-        <div style={{flex: 4}}>
+        <div style={{flex: 3}}>
           Status
         </div>
       </div>
