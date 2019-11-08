@@ -1452,7 +1452,7 @@ SuppliersActions.exportStopPlacesAllProviders = () => dispatch => {
 };
 
 SuppliersActions.exportStopPlacesByProvider = (providerId) => dispatch => {
-    const url = window.config.tiamatBaseUrl + `netex/export/initiate?providerId=` + providerId;
+    const url = window.config.tiamatBaseUrl + 'netex/export/initiate?providerId=' + providerId;
 
     dispatch(requestExportStopPlacesByProvider());
     return axios({
@@ -1481,6 +1481,7 @@ SuppliersActions.exportStopPlacesByProvider = (providerId) => dispatch => {
         });
 };
 
+//TODO Fonction potentiellement en double avec exportStopPlacesByProvider ?
 SuppliersActions.requestExportStopPlacesOneProvider = id => dispatch => {
     const url = window.config.exportStopPlacesBaseUrl + `${id}/export`;
 
