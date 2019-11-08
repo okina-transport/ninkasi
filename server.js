@@ -72,7 +72,8 @@ convictConfig.then((convict) => {
       geocoderAdminBaseUrl: convict.get('geocoderAdminBaseUrl'),
       endpointBase: convict.get('endpointBase'),
       chouetteBaseUrl: convict.get('chouetteBaseUrl'),
-      exportStopPlacesBaseUrl: convict.get('exportStopPlacesBaseUrl')
+      exportStopPlacesBaseUrl: convict.get('exportStopPlacesBaseUrl'),
+      tiamatBaseUrl: convict.get('tiamatBaseUrl')
     }
 
     createKeyCloakConfig(convict.get('authServerUrl'))

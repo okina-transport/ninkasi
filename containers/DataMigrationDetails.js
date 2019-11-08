@@ -238,6 +238,7 @@ class DataMigrationDetails extends React.Component {
           chouetteInfo.migrateDataToProvider +
           '). If success, VALIDATE in level 2 space will be called',
       export: 'Export GTFS data and trigger bulding',
+      exportStopPlaces: 'Export stop places for current provider',
       clearEventHistory: 'Clean event history',
       clean: 'Clean data space (delete ALL transport data)',
       cleanStopPlacesChouette: 'Clean Stop place register in Chouette'
@@ -277,6 +278,13 @@ class DataMigrationDetails extends React.Component {
               >
                 Export
               </Button>}
+          <Button
+              title={toolTips.exportStopPlaces}
+              color="primary"
+              onClick={this.handleExportStopPlacesForCurrentProvider}
+          >
+            Export stop places
+          </Button>
           <Button
             title={toolTips.clearEventHistory}
             color="danger"
@@ -417,6 +425,10 @@ class DataMigrationDetails extends React.Component {
 
   handleExportData = () => {
     this.props.dispatch(SuppliersActions.exportData(this.props.activeId));
+  };
+
+  handleExportStopPlacesForCurrentProvider = () => {
+    this.props.dispatch(SuppliersActions.exportStopPlacesByProvider(this.props.activeId));
   };
 
   handleTransferData = () => {

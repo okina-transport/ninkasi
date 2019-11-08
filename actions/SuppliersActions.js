@@ -1184,6 +1184,10 @@ function requestExportStopPlacesAllProviders() {
     return { type: types.REQUEST_EXPORT_STOP_PLACES_ALL_PROVIDERS };
 }
 
+function requestExportStopPlacesByProvider() {
+    return { type: types.REQUEST_EXPORT_STOP_PLACES_BY_PROVIDER };
+}
+
 function requestExportStopPlacesOneProvider() {
     return { type: types.REQUEST_EXPORT_STOP_PLACES_ONE_PROVIDER };
 }
@@ -1341,9 +1345,14 @@ SuppliersActions.logEvent = event => {
   };
 };
 
-SuppliersActions.getExportedFiles = () => dispatch => {
+SuppliersActions.getExportedFiles = (providerId) => dispatch => {
   dispatch(sendData(types.REQUESTED_EXPORTED_FILES, null));
-  const url = window.config.timetableAdminBaseUrl + 'export/files';
+  let url = window.config.timetableAdminBaseUrl + 'export/files';
+
+  if(providerId) {
+      url += '/' + providerId;
+  }
+
   return axios({
     url: url,
     timeout: 20000,
@@ -1437,6 +1446,36 @@ SuppliersActions.exportStopPlacesAllProviders = () => dispatch => {
             dispatch(
                 SuppliersActions.logEvent({
                     title: `Export stop places for all providers failed`
+                })
+            );
+        });
+};
+
+SuppliersActions.exportStopPlacesByProvider = (providerId) => dispatch => {
+    const url = window.config.tiamatBaseUrl + `netex/export/initiate?providerId=` + providerId;
+
+    dispatch(requestExportStopPlacesByProvider());
+    return axios({
+        url: url,
+        timeout: 20000,
+        method: 'get',
+        ...getConfigLight()
+    })
+        .then(function(response) {
+            dispatch(sendData(response.data, types.SUCCESS_EXPORT_STOP_PLACES_BY_PROVIDER));
+            dispatch(SuppliersActions.addNotification('Export stop places for current provider started', 'success'));
+            dispatch(
+                SuppliersActions.logEvent({
+                    title: `Export stop places for all providers started`
+                })
+            );
+        })
+        .catch(function(response) {
+            dispatch(sendData(response.data, types.ERROR_EXPORT_STOP_PLACES_BY_PROVIDER));
+            dispatch(SuppliersActions.addNotification('Export stop places for current provider failed', 'error'));
+            dispatch(
+                SuppliersActions.logEvent({
+                    title: `Export stop places for current provider failed`
                 })
             );
         });

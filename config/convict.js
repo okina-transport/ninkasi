@@ -74,6 +74,12 @@ module.exports = new Promise(function (resolve, reject) {
       format: String,
       default: "https://mosaic.dev-2.okina.fr/api-proxy/api/export/1.0/",
       env: "EXPORT_STOP_PLACES_BASE_URL"
+    },
+    tiamatBaseUrl: {
+      doc: "Base Tiamat URL for to export stop places",
+      format: String,
+      default: "https://mosaic.dev-2.okina.fr/api-proxy/api/stop_places/1.0/",
+      env: "TIAMAT_BASE_URL"
     }
 
   });

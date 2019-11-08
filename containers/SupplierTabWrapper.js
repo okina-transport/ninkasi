@@ -87,6 +87,10 @@ class SupplierTabWrapper extends React.Component {
       dispatch(SuppliersActions.getExportedFiles());
     }
 
+    if (queryTab === 'exportedFilesByProvider') {
+      dispatch(SuppliersActions.getExportedFiles(activeId));
+    }
+
     if (displayAllSuppliers && activeTabForAllProvider === 'chouetteJobs') {
       dispatch(SuppliersActions.getChouetteJobsForAllSuppliers());
     }
