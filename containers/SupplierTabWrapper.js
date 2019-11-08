@@ -320,6 +320,9 @@ class SupplierTabWrapper extends React.Component {
             <Tab value="statistics" label="Statistics">
               <StaticsForProvider provider={provider} />
             </Tab>
+            <Tab value="exportedFilesByProvider" label="Exported files">
+              <ExportedFilesView />
+            </Tab>
             <Tab value="uploadFiles" label="Upload file">
               <FileUpload
                 fileUploadProgress={fileUploadProgress}

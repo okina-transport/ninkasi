@@ -22,7 +22,7 @@ export const addExportedFileMetadata = (
     } else if (format === 'GTFS') {
       norwayGTFS.push(file);
     }
-    norwayNetex.push(file);
+    return;
   }
 
   if (providerData[providerId]) {
