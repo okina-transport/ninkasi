@@ -11,7 +11,6 @@ import Checkbox from 'material-ui/Checkbox';
 import Popover from 'material-ui/Popover';
 import MdDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import Divider from 'material-ui/Divider';
-import peliasTasks from '../config/peliasTasks';
 import moment from 'moment';
 import roleParser from '../roles/rolesParser';
 import MdEdit from 'material-ui/svg-icons/image/edit';
@@ -26,14 +25,9 @@ class SuppliersContainer extends React.Component {
     super(props);
 
     let tasks = {};
-    peliasTasks.forEach(option => (tasks[option.task] = true));
 
     this.state = {
-      peliasOpen: false,
       anchorEl: null,
-      peliasOptions: {
-        ...tasks
-      },
       confirmDialogOpen: false,
       confirmAction: null,
       confirmTitle: '',
@@ -59,66 +53,6 @@ class SuppliersContainer extends React.Component {
     );
   }
 
-  handleBuildGraph() {
-    this.setState({
-      confirmDialogOpen: true,
-      confirmTitle: 'Build graph',
-      confirmInfo: 'Are you sure you want to build graph?',
-      confirmAction: () => {
-        const { dispatch } = this.props;
-        dispatch(SuppliersActions.buildGraph());
-      }
-    });
-  }
-
-  handleUpdateMapbox() {
-    this.setState({
-      confirmDialogOpen: true,
-      confirmTitle: 'Update Mapbox',
-      confirmInfo: 'Are you sure you want to update Mapbox?',
-      confirmAction: () => {
-        const { dispatch } = this.props;
-        dispatch(SuppliersActions.updateMapbox());
-      }
-    });
-  }
-
-  handleFetchOSM() {
-    this.setState({
-      confirmDialogOpen: true,
-      confirmTitle: 'Fetch Open Street Map Data',
-      confirmInfo: 'Are you sure you want to fetch Open Street Map data?',
-      confirmAction: () => {
-        const { dispatch } = this.props;
-        dispatch(SuppliersActions.fetchOSM());
-      }
-    });
-  }
-
-  handleUploadGoogleProduction() {
-    this.setState({
-      confirmDialogOpen: true,
-      confirmTitle: 'Upload GTFS data to Google (production)',
-      confirmInfo: 'Are you sure you want to upload latest GTFS export to Google (production)?',
-      confirmAction: () => {
-        const { dispatch } = this.props;
-        dispatch(SuppliersActions.uploadGoogleProduction());
-      }
-    });
-  }
-
-    handleUploadGoogleQA() {
-    this.setState({
-      confirmDialogOpen: true,
-      confirmTitle: 'Upload GTFS data to Google (QA)',
-      confirmInfo: 'Are you sure you want to upload latest GTFS export to Google (QA)?',
-      confirmAction: () => {
-        const { dispatch } = this.props;
-        dispatch(SuppliersActions.uploadGoogleQA());
-      }
-    });
-  }
-
   selectSupplier(value) {
     const { dispatch } = this.props;
     if (value > 0) {
@@ -135,9 +69,9 @@ class SuppliersContainer extends React.Component {
   handleCancelAllJobs() {
     this.setState({
       confirmDialogOpen: true,
-      confirmTitle: 'Cancel all chouette jobs',
+      confirmTitle: 'Annuler tous les IEV',
       confirmInfo:
-        'Are you want to cancel all chouette jobs for all providers?',
+        'Etes-vous sûr de vouloir annuler les IEV pour toutes les filiales ?',
       confirmAction: () => {
         const { dispatch } = this.props;
         dispatch(SuppliersActions.cancelAllChouetteJobsforAllProviders());
@@ -156,10 +90,10 @@ class SuppliersContainer extends React.Component {
 
     switch (filter) {
       case 'level1':
-        filterText = ' in level 1 space';
+        filterText = ' dans l\'espace de niveau 1';
         break;
       case 'level2':
-        filterText = ' in level 2 space';
+        filterText = ' dans l\'espace de niveau 2';
         break;
       default:
         break;
@@ -167,8 +101,8 @@ class SuppliersContainer extends React.Component {
 
     this.setState({
       confirmDialogOpen: true,
-      confirmTitle: 'Clean Data Spaces',
-      confirmInfo: `Are you sure you want to clean all dataspaces for all providers${filterText}?`,
+      confirmTitle: 'Nettoyer les espaces de données',
+      confirmInfo: `Etes-vous sûr de vouloir nettoyer les espaces de données de toutes les filiales${filterText}?`,
       confirmAction: () => {
         const { dispatch } = this.props;
         dispatch(SuppliersActions.cleanAllDataspaces(filter));
@@ -180,8 +114,8 @@ class SuppliersContainer extends React.Component {
   handleCleanFileFilter() {
     this.setState({
       confirmDialogOpen: true,
-      confirmTitle: 'Clean File Filter',
-      confirmInfo: 'Are you sure you want to clean file filter?',
+      confirmTitle: 'Nettoyer la liste des fichiers d\'imports',
+      confirmInfo: 'Etes-vous sûr de vouloir nettoyer la liste des fichiers d\'import ?',
       confirmAction: () => {
         const { dispatch } = this.props;
         dispatch(SuppliersActions.cleanFileFilter());
@@ -190,39 +124,12 @@ class SuppliersContainer extends React.Component {
     });
   }
 
-  handleTogglePeliasOpen(event, open) {
-    this.setState({
-      peliasOpen: open,
-      anchorEl: event.currentTarget
-    });
-  }
-
-  handlePeliasOptionChecked(event, task) {
-    this.setState({
-      peliasOptions: Object.assign({}, this.state.peliasOptions, {
-        [task]: event.target.checked
-      })
-    });
-  }
-
-  handleExecutePelias() {
-    this.setState({
-      confirmDialogOpen: true,
-      confirmTitle: 'Execute Pelias tasks',
-      confirmInfo: 'Are you sure you want to execute selected pelias tasks?',
-      confirmAction: () => {
-        const { dispatch } = this.props;
-        dispatch(SuppliersActions.executePeliasTask(this.state.peliasOptions));
-      },
-      peliasOpen: false
-    });
-  }
 
   handleClearEventHistory() {
     this.setState({
       confirmDialogOpen: true,
-      confirmTitle: 'Clean All Event History',
-      confirmInfo: 'Are you want to clean all event history?',
+      confirmTitle: 'Nettoyer la liste des imports',
+      confirmInfo: 'Etes vous sûr de vouloir nettoyer l\'historique des imports ?',
       confirmAction: () => {
         const { dispatch } = this.props;
         dispatch(SuppliersActions.deleteAllJobs());
@@ -231,30 +138,8 @@ class SuppliersContainer extends React.Component {
     });
   }
 
-  handleClearStopPlaces() {
-    this.setState({
-      confirmDialogOpen: true,
-      confirmTitle: 'Clean Stop Placee Register in Chouette',
-      confirmInfo: 'Are you want to clean Stop Place Register in Chouette?',
-      confirmAction: () => {
-        const { dispatch } = this.props;
-        dispatch(SuppliersActions.cleanStopPlacesInChouette());
-      },
-      cleanPopoverOpen: false
-    });
-  }
-
   handleEditProvider() {
     this.props.dispatch(SuppliersActions.openEditProviderDialog());
-  }
-
-  handleGoogleOpen(event) {
-    event.preventDefault();
-
-    this.setState({
-      googlePopoverOpen: true,
-      anchorEl: event.currentTarget
-    });
   }
 
   handleCleanOpen(event) {
@@ -279,11 +164,6 @@ class SuppliersContainer extends React.Component {
     }
   }
 
-  getLabelByJobType(type) {
-    for (let i = 0; i < peliasTasks.length; i++) {
-      if (peliasTasks[i].task === type) return peliasTasks[i].label;
-    }
-  }
 
   render() {
 
@@ -295,7 +175,7 @@ class SuppliersContainer extends React.Component {
     const supplierItems = [
       {
         id: -1,
-        name: 'All providers'
+        name: 'Toutes les filiales'
       }
     ].concat(suppliers);
 
@@ -307,202 +187,20 @@ class SuppliersContainer extends React.Component {
     };
 
     const toolTips = {
-      history: 'Browse the history of your activites in Ninkasi',
-      buildGraph: 'Build graph for all providers',
-      fetchOSM: 'Fetch Open Street Map data',
-      updateMapbox: 'Update mapbox data from NSR',
-      cleanFileFilter: 'Clean file filter',
-      canceAllJobs: 'Cancel all current chouette jobs',
-      cleanAll: 'Clean all specificed by level',
-      createNewProvider: 'Create new provider',
-      pelias: 'Execute pelias operations',
-      editProvider: 'Edit provider',
-      cleanEventHistory: 'Clean event history'
+      history: 'Voir l\'historique de vos activités dans l\'administration',
+      cleanFileFilter: 'Nettoyer la liste des fichiers d\'import',
+      canceAllJobs: 'Annuler tous les IEV en cours',
+      cleanAll: 'Nettoyage par niveau',
+      createNewProvider: 'Créer une nouvelle filiale',
+      editProvider: 'Modifier une filiale',
+      cleanEventHistory: 'Nettoyer la liste des imports'
     };
 
-    const peliasPopoverStyle = {
-      overflowY: 'hidden',
-      padding: 10
-    };
 
-    let peliasOptions = peliasTasks.map(option =>
-      <Checkbox
-        key={'pelias-checkbox-' + option.task}
-        label={option.label}
-        onCheck={e => this.handlePeliasOptionChecked(e, option.task)}
-        defaultChecked={true}
-        labelPosition="right"
-        style={{ marginTop: 5, marginBottom: 5 }}
-      />
-    );
-
-    peliasOptions.push(
-      <Divider
-        key={'pelias-divider1'}
-        style={{ marginTop: 10, marginBottom: 5 }}
-      />
-    );
-
-    peliasOptions.push(
-      <div
-        key={'pelias-options-status-wrapper'}
-        style={{ display: 'flex', flexDirection: 'column', padding: 5 }}
-      >
-        <span style={{ fontWeight: 600 }}>Status</span>
-        {otherStatus.map((status, index) =>
-          <div
-            key={'jobtype-status' + index}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: 2,
-              background: index % 2 ? '#F8F8F8' : '#fff'
-            }}
-          >
-            <div style={{ marginLeft: 5, flex: 9, fontSize: '0.9em' }}>
-              {this.getLabelByJobType(status.type)}
-            </div>
-            <div style={{ fontSize: '0.9em', flex: 6 }}>
-              {moment(status.started).format('LLLL')}
-            </div>
-            <div
-              style={{
-                marginLeft: 5,
-                flex: 2,
-                color: this.getColorByStatus(status.status)
-              }}
-            >
-              {status.status}
-            </div>
-          </div>
-        )}
-      </div>
-    );
-
-    peliasOptions.push(
-      <Divider
-        key={'pelias-divider2'}
-        style={{ marginTop: 10, marginBottom: 10 }}
-      />
-    );
-
-    peliasOptions.push(
-      <div
-        key={'pelias-buttons'}
-        style={{ width: '100%', textAlign: 'center' }}
-      >
-        <FlatButton
-          primary={true}
-          labelStyle={{ fontSize: 12 }}
-          onClick={() => this.handleExecutePelias()}
-          disabled={Object.values(this.state.peliasOptions).every(
-            value => !value
-          )}
-          label={'Execute'}
-        />
-      </div>
-    );
 
     return (
       <div className="suppliers-container">
         <div style={innerContainerStyle}>
-          <div>
-            <FlatButton
-              disabled={!isAdmin}
-              title={toolTips.pelias}
-              labelStyle={{ fontSize: 12, color: '#fff' }}
-              label={'Pelias'}
-              labelPosition="before"
-              onClick={event => this.handleTogglePeliasOpen(event, true)}
-              icon={
-                <MdDropDown
-                  color="#fff"
-                  style={{ verticalAlign: 'middle', marginTop: -3 }}
-                />
-              }
-            />
-            <Popover
-              open={this.state.peliasOpen}
-              anchorEl={this.state.anchorEl}
-              anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-              targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-              onRequestClose={event =>
-                this.handleTogglePeliasOpen(event, false)}
-              style={peliasPopoverStyle}
-            >
-              {peliasOptions}
-            </Popover>
-            <FlatButton
-              disabled={!isAdmin}
-              title={toolTips.buildGraph}
-              labelStyle={{ fontSize: 12, color: '#fff' }}
-              label={'Build Graph'}
-              onClick={this.handleBuildGraph.bind(this)}
-            />
-            <FlatButton
-              disabled={!isAdmin}
-              title={toolTips.fetchOSM}
-              labelStyle={{ fontSize: 12, color: '#fff' }}
-              label={'Fetch OSM'}
-              onClick={this.handleFetchOSM.bind(this)}
-            />
-            <FlatButton
-                disabled={!isAdmin}
-                onClick={this.handleGoogleOpen.bind(this)}
-            >
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div
-                    style={{
-                        fontSize: 12,
-                        color: '#fff',
-                        paddingLeft: 8,
-                        paddingRight: 8,
-                        paddingTop: 2,
-                        textTransform: 'uppercase'
-                    }}
-                >
-                  Google
-                </div>
-                <MdDropDown color="#fff"/>
-              </div>
-            </FlatButton>
-          <Popover
-            open={this.state.googlePopoverOpen}
-            anchorEl={this.state.anchorEl}
-            anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-            targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-            onRequestClose={() => this.setState({ googlePopoverOpen: false })}
-          >
-            <MenuItem
-              primaryText={'Upload GTFS (production)'}
-              style={{ fontSize: '1.1em' }}
-              onClick={() => this.handleUploadGoogleProduction()}
-              disabled={!isAdmin}
-              title={toolTips.uploadGoogleProduction}
-            />
-            <MenuItem
-              primaryText={'Upload GTFS (QA)'}
-              style={{ fontSize: '1em' }}
-              onClick={() => this.handleUploadGoogleQA()}
-              disabled={!isAdmin}
-              title={toolTips.uploadGoogleQA}
-            />
-          </Popover>
-            {/*<FlatButton
-              disabled={!isAdmin}
-              title={toolTips.updateMapbox}
-              labelStyle={{ fontSize: 12, color: '#fff' }}
-              label={'Update Mapbox'}
-              onClick={this.handleUpdateMapbox.bind(this)}
-            />*/}
-          </div>
-          <div
-            style={{
-              borderLeft: '1px solid #4c4c4c',
-              height: 15,
-              margin: '10px 0'
-            }}
-          />
           <div>
             <FlatButton
               disabled={!isAdmin}
@@ -523,7 +221,7 @@ class SuppliersContainer extends React.Component {
                     textTransform: 'uppercase'
                   }}
                 >
-                  Clean
+                  Nettoyage
                 </div>
                 <MdDropDown color="#fff"/>
               </div>
@@ -533,7 +231,7 @@ class SuppliersContainer extends React.Component {
               title={toolTips.canceAllJobs}
               style={{transform: 'translateY(-3px)'}}
               labelStyle={{ fontSize: 12, color: '#fff' }}
-              label={'Cancel all jobs'}
+              label={'Annuler tous les IEV en cours'}
               icon={
                 <MdWarning
                   color={iconColor}
@@ -546,7 +244,7 @@ class SuppliersContainer extends React.Component {
                 disabled={!isAdmin}
                 style={{transform: 'translateY(-3px)'}}
                 labelStyle={{ fontSize: 12, color: '#fff' }}
-                label={'Export stop places for all providers'}
+                label={'Export des points d\'arrets'}
                 onClick={() => this.exportAllStopPlaces()}
             />
           </div>
@@ -558,25 +256,18 @@ class SuppliersContainer extends React.Component {
             onRequestClose={() => this.setState({ cleanPopoverOpen: false })}
           >
             <MenuItem
-              primaryText={'Clean file filter'}
+              primaryText={'Nettoyer la liste des fichiers d\'import'}
               style={{ fontSize: '1.1em' }}
               onClick={() => this.handleCleanFileFilter()}
               disabled={!isAdmin}
               title={toolTips.cleanFileFilter}
             />
             <MenuItem
-              primaryText={'Clean event history'}
+              primaryText={'Nettoyer la liste des imports'}
               style={{ fontSize: '1em' }}
               onClick={() => this.handleClearEventHistory()}
               disabled={!isAdmin}
               title={toolTips.cleanEventHistory}
-            />
-            <MenuItem
-              primaryText={'Clean Stop Places'}
-              style={{ fontSize: '1em' }}
-              onClick={() => this.handleClearStopPlaces()}
-              disabled={!isAdmin}
-              title={toolTips.cleanStopPlacesChouette}
             />
             <MenuItem
               disabled={!isAdmin}
@@ -586,17 +277,17 @@ class SuppliersContainer extends React.Component {
               rightIcon={<ArrowDropRight />}
               menuItems={[
                 <MenuItem
-                  primaryText={'All'}
+                  primaryText={'Tous'}
                   onClick={() => this.handleCleanAllDataSpaces('all')}
                   style={{ fontSize: '1em' }}
                 />,
                 <MenuItem
-                  primaryText={'Level 1'}
+                  primaryText={'Niveau 1'}
                   onClick={() => this.handleCleanAllDataSpaces('level1')}
                   style={{ fontSize: '1em' }}
                 />,
                 <MenuItem
-                  primaryText={'Level 2'}
+                  primaryText={'Niveau 2'}
                   onClick={() => this.handleCleanAllDataSpaces('level2')}
                   style={{ fontSize: '1em' }}
                 />
@@ -617,7 +308,7 @@ class SuppliersContainer extends React.Component {
               id="select-supplier"
               floatingLabelFixed={true}
               style={{ minWidth: 350 }}
-              floatingLabelText={'Provider'}
+              floatingLabelText={'Filiale'}
               onChange={(e, k, v) => this.selectSupplier(v)}
               autoWidth={true}
               value={Number(activeProviderId) || -1}
