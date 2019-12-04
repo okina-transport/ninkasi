@@ -1,4 +1,4 @@
-FROM node:6.3
+FROM node:8.16.2
 # https://hub.docker.com/_/node/
 
 
