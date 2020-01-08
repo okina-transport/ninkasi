@@ -32,25 +32,39 @@ const getConfig = () => {
 
 const getConfigMultipart = () => {
   let config = {};
-  let token = localStorage.getItem('NINKASI::jwt');
+    let token = localStorage.getItem('NINKASI::jwt');
 
     config.headers = {
         // 'Content-Type': 'multipart/form-data',
         // Accept: 'multipart/form-data',
         Authorization: 'Bearer ' + token
     };
-  return config;
+    return config;
+};
+
+const getConfigUploadFile = (user, description) => {
+    let config = {};
+    let token = localStorage.getItem('NINKASI::jwt');
+
+    config.headers = {
+        // 'Content-Type': 'multipart/form-data',
+        // Accept: 'multipart/form-data',
+        Authorization: 'Bearer ' + token,
+        RutebankenUser: user,
+        RutebankenDescription: description
+    };
+    return config;
 };
 
 SuppliersActions.cleanStopPlacesInChouette = () => dispatch => {
-  const url = window.config.timetableAdminBaseUrl + 'stop_places/clean';
-  return axios
-    .post(url, null, getConfig())
-    .then(response => {
-      dispatch(
-        SuppliersActions.addNotification(
-          'Deleted Stop Place Register in Chouette',
-          'success'
+    const url = window.config.timetableAdminBaseUrl + 'stop_places/clean';
+    return axios
+        .post(url, null, getConfig())
+        .then(response => {
+            dispatch(
+                SuppliersActions.addNotification(
+                    'Deleted Stop Place Register in Chouette',
+                    'success'
         )
       );
       dispatch(
@@ -164,15 +178,13 @@ SuppliersActions.uploadFiles = (files, user, description, providerId) => dispatc
     // });
 
     data.append('files', files[0]);
-    data.append('user', user);
-    data.append('description', description);
 
   var config = {
     onUploadProgress: function(progressEvent) {
       let percentCompleted = progressEvent.loaded / progressEvent.total * 100;
       dispatch(sendData(percentCompleted, types.UPDATED_FILE_UPLOAD_PROGRESS));
     },
-    ...getConfigMultipart()
+    ...getConfigUploadFile(user, description)
   };
 
   return axios
