@@ -49,7 +49,7 @@ class ExportedFilesRow extends Component {
       index
     );
 
-    const norwayDisplayName = "Mosaic";
+    const norwayDisplayName = "Mobiiti";
     const isAggregatedSet = (referential === norwayDisplayName);
     
     const style = {

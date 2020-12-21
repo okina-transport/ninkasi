@@ -47,7 +47,7 @@ export const addExportedNorwayMetadata = (norwayNetex, norwayGTFS, providerData)
   providerData['ALL'] = {
     NETEX,
     GTFS,
-    referential: 'Mosaic'
+    referential: 'Mobiiti'
   };
 };
 
@@ -62,7 +62,7 @@ export const formatProviderData = providerData => {
       [ExportStatus.ERROR]: 2,
     };
 
-    if (a.referential === 'Mosaic') return -1;
+    if (a.referential === 'Mobiiti') return -1;
 
     return priority[statusA] - priority[statusB];
   });
