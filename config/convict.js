@@ -18,37 +18,37 @@ module.exports = new Promise(function (resolve, reject) {
     },
     organisationsBaseUrl: {
       doc: "Base URL for for Organisations API including slash",
-      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/organisations/1.0/",
+      default: "/api-proxy/api/organisations/1.0/",
       env: "ORGANISATIONS_BASE_URL"
     },
     providersBaseUrl: {
       doc: "Base URL for for Providers API including slash",
-      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/providers/1.0/",
+      default: "/api-proxy/api/providers/1.0/",
       env: "PROVIDERS_BASE_URL"
     },
     eventsBaseUrl: {
       doc: "Base URL for for Events API including slash",
-      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/events/1.0/",
+      default: "/api-proxy/api/events/1.0/",
       env: "EVENTS_BASE_URL"
     },
     timetableAdminBaseUrl: {
       doc: "Base URL for for Timatable admin API including slash",
-      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/timetable_admin/1.0/",
+      default: "/api-proxy/api/timetable_admin/1.0/",
       env: "TIMETABLE_ADMIN_BASE_URL"
     },
     mapAdminBaseUrl: {
       doc: "Base URL for for Map admin API including slash",
-      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/map_admin/1.0/",
+      default: "/api-proxy/api/map_admin/1.0/",
       env: "MAP_ADMIN_BASE_URL"
     },
     mapboxAdminBaseUrl: {
       doc: "Base URL for for Mapbox admin API including slash",
-      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/mapbox_admin/1.0/",
+      default: "/api-proxy/api/mapbox_admin/1.0/",
       env: "MAPBOX_ADMIN_BASE_URL"
     },
     geocoderAdminBaseUrl: {
       doc: "Base URL for for Geocoder admin API including slash",
-      default: "https://tiamat-rmr.nouvelle-aquitaine.pro/api/geocoder_admin/1.0/",
+      default: "/api-proxy/api/geocoder_admin/1.0/",
       env: "GEOCODER_ADMIN_BASE_URL"
     },
     endpointBase: {
@@ -60,25 +60,25 @@ module.exports = new Promise(function (resolve, reject) {
     authServerUrl: {
       doc: "URL to keycloak auth server",
       format: String,
-      default: "https://mosaic.dev-2.okina.fr/auth",
+      default: "/auth",
       env: "AUTH_SERVER_URL"
     },
     chouetteBaseUrl: {
       doc: "URL to Chouette UI",
       format: String,
-      default: "https://mosaic.dev-2.okina.fr/offre",
+      default: "/offre",
       env: "CHOUETTE_BASE_URL"
     },
     exportStopPlacesBaseUrl: {
       doc: "Base URL for to export stop places",
       format: String,
-      default: "https://mosaic.dev-2.okina.fr/api-proxy/api/export/1.0/",
+      default: "/api-proxy/api/export/1.0/",
       env: "EXPORT_STOP_PLACES_BASE_URL"
     },
     tiamatBaseUrl: {
       doc: "Base Tiamat URL for to export stop places",
       format: String,
-      default: "https://mosaic.dev-2.okina.fr/api-proxy/api/stop_places/1.0/",
+      default: "/api-proxy/api/stop_places/1.0/",
       env: "TIAMAT_BASE_URL"
     }
 

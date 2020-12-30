@@ -10,7 +10,7 @@
     "test": "./node_modules/.bin/mocha -r jsdom-global/register --compilers js:babel-core/register ./tests",
     "dev": "CHOUETTE_BASE_URL=https://offre.dev-2.okina.fr/ PROVIDERS_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/providers/1.0/ EVENTS_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/events/1.0/ TIMETABLE_ADMIN_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/timetable_admin/1.0/  ORGANISATIONS_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/organisations/1.0/ EXPORT_STOP_PLACES_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/export/1.0/  node server.js",
     "prod": "ENDPOINTBASE=/admin/  BABEL_ENV=production NODE_ENV=production node server.js",
-    "integ": "BABEL_ENV=production NODE_ENV=production PROVIDERS_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/providers/1.0/ EVENTS_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/events/1.0/ TIMETABLE_ADMIN_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/timetable_admin/1.0/  ORGANISATIONS_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/organisations/1.0/ EXPORT_STOP_PLACES_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/export/1.0/ node server.js"
+    "integ": "ENDPOINTBASE=/admin/ BABEL_ENV=production NODE_ENV=production node server.js"
   },
   "author": "Sean Erik Scully",
   "license": "MIT",
