@@ -1200,6 +1200,10 @@ function requestExportStopPlacesByProvider() {
     return { type: types.REQUEST_EXPORT_STOP_PLACES_BY_PROVIDER };
 }
 
+function requestDeleteStopPlacesByProvider() {
+    return { type: types.REQUEST_DELETE_STOP_PLACES_BY_PROVIDER };
+}
+
 function requestExportStopPlacesOneProvider() {
     return { type: types.REQUEST_EXPORT_STOP_PLACES_ONE_PROVIDER };
 }
@@ -1488,6 +1492,45 @@ SuppliersActions.exportStopPlacesByProvider = (providerId) => dispatch => {
             dispatch(
                 SuppliersActions.logEvent({
                     title: `Export stop places for current provider failed`
+                })
+            );
+        });
+};
+
+SuppliersActions.deleteStopPlacesByProvider = (providerName) => dispatch => {
+    const url = window.config.tiamatBaseUrl + 'graphql';
+
+    dispatch(requestDeleteStopPlacesByProvider());
+    return axios({
+        url: url,
+        timeout: 20000,
+        method: 'post',
+        data: {
+            query: `
+                mutation mutateDeleteStopPlaceByOrganisation($organisationName: String!) {
+                    deleteStopPlaceByOrganisation(organisationName: $organisationName)
+                }`,
+            variables: {
+                organisationName: providerName,
+            }
+        },
+        ...getConfigLight()
+    })
+        .then(function(response) {
+            dispatch(sendData(response.data, types.SUCCESS_DELETE_STOP_PLACES_BY_PROVIDER));
+            dispatch(SuppliersActions.addNotification('Delete stop places for current provider started', 'success'));
+            dispatch(
+                SuppliersActions.logEvent({
+                    title: `Delete stop places for all providers started`
+                })
+            );
+        })
+        .catch(function(response) {
+            dispatch(sendData(response.data, types.ERROR_DELETE_STOP_PLACES_BY_PROVIDER));
+            dispatch(SuppliersActions.addNotification('Delete stop places for current provider failed', 'error'));
+            dispatch(
+                SuppliersActions.logEvent({
+                    title: `Delete stop places for current provider failed`
                 })
             );
         });

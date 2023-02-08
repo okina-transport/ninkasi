@@ -241,7 +241,8 @@ class DataMigrationDetails extends React.Component {
       exportStopPlaces: 'Export stop places for current provider',
       clearEventHistory: 'Clean event history',
       clean: 'Clean data space (delete ALL transport data)',
-      cleanStopPlacesChouette: 'Clean Stop place register in Chouette'
+      cleanStopPlacesChouette: 'Clean Stop place register in Chouette',
+      cleanStopPlacesTiamat: 'Clean Stop place register in Tiamat'
     };
 
     return (
@@ -298,6 +299,13 @@ class DataMigrationDetails extends React.Component {
             onClick={this.handleCleanDataspace}
           >
             Clean
+          </Button>
+          <Button
+              title={toolTips.cleanStopPlacesTiamat}
+              color="danger"
+              onClick={this.handleDeleteStopPlacesForCurrentProvider}
+          >
+            Clean stop places
           </Button>
         </div>
         {isLevel1Provider
@@ -429,6 +437,17 @@ class DataMigrationDetails extends React.Component {
 
   handleExportStopPlacesForCurrentProvider = () => {
     this.props.dispatch(SuppliersActions.exportStopPlacesByProvider(this.props.activeId));
+  };
+
+  handleDeleteStopPlacesForCurrentProvider = () => {
+    let activeProvider = this.props.providers.find(provider => provider.id === this.props.activeId);
+    const response = confirm(
+        'Are you sure you want to clean up stop places of current provider?'
+    );
+    if (response === true) {
+      const { dispatch } = this.props;
+      dispatch(SuppliersActions.deleteStopPlacesByProvider(activeProvider.name));
+    }
   };
 
   handleTransferData = () => {
