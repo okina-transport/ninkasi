@@ -11,7 +11,8 @@
     "dev": "CHOUETTE_BASE_URL=https://offre.dev-2.okina.fr/ PROVIDERS_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/providers/1.0/ EVENTS_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/events/1.0/ TIMETABLE_ADMIN_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/timetable_admin/1.0/  ORGANISATIONS_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/organisations/1.0/ EXPORT_STOP_PLACES_BASE_URL=https://mosaic.dev-2.okina.fr/api-proxy/api/export/1.0/  node server.js",
     "prod": "ENDPOINTBASE=/admin/  BABEL_ENV=production NODE_ENV=production node server.js",
     "integ": "ENDPOINTBASE=/admin/ BABEL_ENV=production NODE_ENV=production node server.js",
-    "local": "AUTH_SERVER_URL=https://mobi-iti-ara.dev.okina.fr/auth BABEL_ENV=production NODE_ENV=production PROVIDERS_BASE_URL=http://0.0.0.0:8000/api/providers/1.0/ ORGANISATIONS_BASE_URL=http://0.0.0.0:8000/api/organisations/1.0/ EVENTS_BASE_URL=http://0.0.0.0:8000/api/events/1.0/ TIMETABLE_ADMIN_BASE_URL=http://0.0.0.0:8000/api/timetable_admin/1.0/ node server.js"
+    "local": "AUTH_SERVER_URL=https://mobi-iti-ara.dev.okina.fr/auth BABEL_ENV=production NODE_ENV=production PROVIDERS_BASE_URL=http://0.0.0.0:8000/api/providers/1.0/ ORGANISATIONS_BASE_URL=http://0.0.0.0:8000/api/organisations/1.0/ EVENTS_BASE_URL=http://0.0.0.0:8000/api/events/1.0/ TIMETABLE_ADMIN_BASE_URL=http://0.0.0.0:8000/api/timetable_admin/1.0/ node server.js",
+    "local-tiamat-ide": "AUTH_SERVER_URL=https://mobi-iti-ara.dev.okina.fr/auth BABEL_ENV=production NODE_ENV=production PROVIDERS_BASE_URL=http://0.0.0.0:8000/api/providers/1.0/ ORGANISATIONS_BASE_URL=http://0.0.0.0:8000/api/organisations/1.0/ EVENTS_BASE_URL=http://0.0.0.0:8000/api/events/1.0/ TIMETABLE_ADMIN_BASE_URL=http://0.0.0.0:8000/api/timetable_admin/1.0/ TIAMAT_BASE_URL=http://0.0.0.0:8484/services/stop_places/ node server.js"
   },
   "author": "Sean Erik Scully",
   "license": "MIT",
@@ -49,7 +50,7 @@
     "muicss": "^0.9.7",
     "nightwatch": "^0.9.6",
     "nock": "^9.0.2",
-    "node-sass": "^3.8.0",
+    "node-sass": "^4.14.0",
     "notie": "^3.2.0",
     "prop-types": "^15.5.10",
     "react": "15.6.1",
