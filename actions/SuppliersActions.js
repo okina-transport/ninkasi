@@ -1401,6 +1401,52 @@ SuppliersActions.getExportedFiles = (providerId) => dispatch => {
   });
 };
 
+SuppliersActions.deleteAllParkings = () => dispatch => {
+    return axios({
+        url: window.config.tiamatBaseUrl + 'deleteall/parkings',
+        timeout: 20000,
+        method: 'post',
+        ...getConfig()
+    })
+        .then(function(response) {
+            dispatch(
+                SuppliersActions.addNotification('Parkings deleted', 'success')
+            );
+            dispatch(SuppliersActions.logEvent({ title: 'Parkings deleted' }));
+        })
+        .catch(function(response) {
+            dispatch(
+                SuppliersActions.addNotification('Deleting parkings failed', 'error')
+            );
+            dispatch(
+                SuppliersActions.logEvent({ title: 'Deleting parkings failed' })
+            );
+        });
+};
+
+SuppliersActions.deleteAllPOI = () => dispatch => {
+    return axios({
+        url: window.config.tiamatBaseUrl + 'deleteall/poi',
+        timeout: 20000,
+        method: 'post',
+        ...getConfig()
+    })
+        .then(function(response) {
+            dispatch(
+                SuppliersActions.addNotification('POI deleted', 'success')
+            );
+            dispatch(SuppliersActions.logEvent({ title: 'POI deleted' }));
+        })
+        .catch(function(response) {
+            dispatch(
+                SuppliersActions.addNotification('Deleting poi failed', 'error')
+            );
+            dispatch(
+                SuppliersActions.logEvent({ title: 'Deleting poi failed' })
+            );
+        });
+};
+
 SuppliersActions.cleanFileFilter = () => dispatch => {
   return axios({
     url: window.config.timetableAdminBaseUrl + 'idempotentfilter/clean',

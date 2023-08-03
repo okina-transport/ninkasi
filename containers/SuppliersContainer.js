@@ -124,6 +124,32 @@ class SuppliersContainer extends React.Component {
     });
   }
 
+  handleDeleteParkings() {
+    this.setState({
+      confirmDialogOpen: true,
+      confirmTitle: 'Supprimer tous les parkings (parkings, vélos...)',
+      confirmInfo: 'Etes-vous sûr de vouloir supprimer tous les parkings ?',
+      confirmAction: () => {
+        const { dispatch } = this.props;
+        dispatch(SuppliersActions.deleteAllParkings());
+      },
+      cleanPopoverOpen: false
+    });
+  }
+
+  handleDeletePOI() {
+    this.setState({
+      confirmDialogOpen: true,
+      confirmTitle: 'Supprimer tous les point d\'intérêts (POI, PDV)',
+      confirmInfo: 'Etes-vous sûr de vouloir supprimer tous les points d\'intérêts ?',
+      confirmAction: () => {
+        const { dispatch } = this.props;
+        dispatch(SuppliersActions.deleteAllPOI());
+      },
+      cleanPopoverOpen: false
+    });
+  }
+
 
   handleClearEventHistory() {
     this.setState({
@@ -268,6 +294,20 @@ class SuppliersContainer extends React.Component {
               onClick={() => this.handleClearEventHistory()}
               disabled={!isAdmin}
               title={toolTips.cleanEventHistory}
+            />
+            <MenuItem
+                primaryText={'Supprimer tous les parkings'}
+                style={{ fontSize: '1.1em' }}
+                onClick={() => this.handleDeleteParkings()}
+                disabled={!isAdmin}
+                title={toolTips.cleanFileFilter}
+            />
+            <MenuItem
+                primaryText={'Supprimer tous les points d\'intérêt'}
+                style={{ fontSize: '1.1em' }}
+                onClick={() => this.handleDeletePOI()}
+                disabled={!isAdmin}
+                title={toolTips.cleanFileFilter}
             />
             <MenuItem
               disabled={!isAdmin}
