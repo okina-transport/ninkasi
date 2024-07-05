@@ -1549,7 +1549,7 @@ SuppliersActions.deleteStopPlacesByProvider = (providerName) => dispatch => {
     dispatch(requestDeleteStopPlacesByProvider());
     return axios({
         url: url,
-        timeout: 20000,
+        timeout: 120000,
         method: 'post',
         data: {
             query: `
