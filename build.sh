@@ -8,6 +8,5 @@ PACKAGE_VERSION=$(cat package.json \
   | tr -d '[[:space:]]')
 
 # Lancer la construction de l'image docker.
-# Passe en argument la clé publique de la machine hote (qui doit du coup avoir github dans ses "known_hosts" pour permettre le clonage des repos nécessaires depuis github depuis le container
-docker build --tag=registry.okina.fr/mobiiti/ninkasi:${PACKAGE_VERSION} --force-rm=true . --build-arg SSH_KEY="$(cat ~/.ssh/id_rsa)"
+docker build --tag=registry.okina.fr/mobiiti/ninkasi:${PACKAGE_VERSION} --force-rm=true .
 docker push registry.okina.fr/mobiiti/ninkasi:${PACKAGE_VERSION}
