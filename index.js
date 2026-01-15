@@ -22,7 +22,7 @@ function authWithKeyCloak(endpointBase) {
     let kc = new Keycloak(endpointBase + 'config/keycloak.json');
 
     kc
-        .init({onLoad: 'login-required', checkLoginIframe: false})
+        .init({onLoad: 'login-required', checkLoginIframe: false, useNonce:false })
         .success(authenticated => {
             if (authenticated) {
                 localStorage.setItem('NINKASI::jwt', kc.token);
