@@ -60,7 +60,7 @@ convictConfig.then((convict) => {
     res.sendFile(__dirname + '/config/keycloak.json')
   })
 
-  app.get(ENDPOINTBASE + 'config.json', function (req, res) {
+  app.get(ENDPOINTBASE + 'url-conf.json', function (req, res) {
 
     var cfg = {
       providersBaseUrl: convict.get('providersBaseUrl'),
